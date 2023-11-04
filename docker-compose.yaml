@@ -7,6 +7,13 @@ services:
     volumes:
       - ./:/server
     restart: always
+  nginx:
+    build:
+      dockerfile: ./docker/nginx/Dockerfile
+      context: ./
+    restart: always
+    ports:
+      - 80:80
   db:
     image: postgres:16
     environment:
