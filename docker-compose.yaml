@@ -1,0 +1,20 @@
+version: '3.5'
+services:
+  server:
+    image: node:21-alpine
+    command: sh -c "node /server/server.js"
+    volumes:
+      - ./:/server
+    restart: always
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - ./volumes/pgdata:/var/lib/postgresql/data/pgdata
+    ports:
+      - 5435:5432
+    restart: always
